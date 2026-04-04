@@ -12,6 +12,9 @@ def create_app():
 
     init_db(app)
 
+    from app.logging_config import setup_logging
+    setup_logging(app)
+
     from app import models  # noqa: F401 - registers models with Peewee
     from app.models.product import Product
     from app.database import db
@@ -20,6 +23,9 @@ def create_app():
     db.close()
 
     register_routes(app)
+
+    from app.routes.metrics import metrics_bp
+    app.register_blueprint(metrics_bp)
 
     @app.route("/health")
     def health():
