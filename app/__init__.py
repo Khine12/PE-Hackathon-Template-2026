@@ -13,6 +13,11 @@ def create_app():
     init_db(app)
 
     from app import models  # noqa: F401 - registers models with Peewee
+    from app.models.product import Product
+    from app.database import db
+    db.connect(reuse_if_open=True)
+    db.create_tables([Product], safe=True)
+    db.close()
 
     register_routes(app)
 
