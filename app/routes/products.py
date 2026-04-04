@@ -3,14 +3,23 @@ from peewee import IntegrityError
 from playhouse.shortcuts import model_to_dict
 
 from app.models.product import Product
+from app.cache import cache_get, cache_set, cache_invalidate
 
 products_bp = Blueprint("products", __name__)
+
+PRODUCTS_CACHE_KEY = "products:all"
 
 
 @products_bp.route("/products", methods=["GET"])
 def list_products():
+    cached = cache_get(PRODUCTS_CACHE_KEY)
+    if cached is not None:
+        return jsonify(cached)
+
     products = Product.select().where(Product.is_active == True)
-    return jsonify([model_to_dict(p) for p in products])
+    result = [model_to_dict(p) for p in products]
+    cache_set(PRODUCTS_CACHE_KEY, result, ttl=30)
+    return jsonify(result)
 
 
 @products_bp.route("/products/<int:product_id>", methods=["GET"])
@@ -69,6 +78,7 @@ def create_product():
     except IntegrityError:
         return jsonify({"error": "A product with that name already exists"}), 409
 
+    cache_invalidate(PRODUCTS_CACHE_KEY)
     return jsonify(model_to_dict(product)), 201
 
 
@@ -119,6 +129,7 @@ def update_product(product_id):
     except IntegrityError:
         return jsonify({"error": "A product with that name already exists"}), 409
 
+    cache_invalidate(PRODUCTS_CACHE_KEY)
     return jsonify(model_to_dict(product))
 
 
@@ -131,4 +142,5 @@ def delete_product(product_id):
 
     product.is_active = False
     product.save()
+    cache_invalidate(PRODUCTS_CACHE_KEY)
     return jsonify({"message": "Product deleted"}), 200
