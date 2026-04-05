@@ -292,4 +292,4 @@ PE-Hackathon-Template-2026/
 ## Team
 
 - **Khine Zar Hein** — Backend, Testing, CI/CD, Docker, Scalability, Monitoring, Documentation
-- **Nicolas Tran** — Team Member
+- **Nicolas Tran** — API testing and quality assurance, Project planning and review
