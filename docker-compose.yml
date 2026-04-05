@@ -44,6 +44,15 @@ services:
       - redis
     restart: always
 
+  monitor:
+    build: .
+    command: uv run python monitor.py
+    depends_on:
+      - nginx
+    restart: always
+    environment:
+      PYTHONUNBUFFERED: "1"
+
   nginx:
     image: nginx:alpine
     ports:

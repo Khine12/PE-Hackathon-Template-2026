@@ -1,0 +1,16 @@
+# Alert Configuration for PE Hackathon
+alerts:
+  service_down:
+    description: "Service is unreachable or /health returns non-200"
+    check_interval_seconds: 30
+    threshold: 2  # Alert after 2 consecutive failures
+    endpoint: "http://localhost:5000/health"
+
+  high_error_rate:
+    description: "Error rate exceeds 10% of requests"
+    check_interval_seconds: 30
+    threshold_percent: 10
+
+notification:
+  channel: "discord"
+  webhook_url: "https://discord.com/api/webhooks/1490148939364569160/hcvy5d9Wg-PJeAXTNTfTmty1h3-Yb4edgkHBr1U698mBGDVWtWMBm1DRBUzcHEt6Mzcx"
