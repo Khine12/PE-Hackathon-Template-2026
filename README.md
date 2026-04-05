@@ -7,7 +7,7 @@ A Flask-based product management API built to survive production. This project d
 ```
                     ┌─────────────┐
                     │   Nginx     │
-                    │ Load Balancer│
+                    │Load Balancer│
                     │  (port 5000)│
                     └──────┬──────┘
                            │
@@ -27,8 +27,8 @@ A Flask-based product management API built to survive production. This project d
   └───────────┘                        └─────────────┘
 
         ┌─────────────┐
-        │   Monitor   │  → Discord Webhook Alerts
-        │  (monitor.py)│
+        │   Monitor   │ → Discord Webhook Alerts
+        │ (monitor.py)│
         └─────────────┘
 ```
 
@@ -52,7 +52,7 @@ A Flask-based product management API built to survive production. This project d
 | Reliability Engineering | 🥇 Gold | 83% test coverage, CI/CD, chaos mode, graceful errors |
 | Scalability Engineering | 🥇 Gold | 500 users @ 0% errors, Redis caching, Nginx LB |
 | Incident Response | 🥈 Silver | JSON logging, /metrics, Discord alerting |
-| Documentation | 🥉 Bronze | README, architecture diagram, API docs |
+| Documentation | 🥈 Silver | README, deploy guide, troubleshooting, env vars, API docs |
 
 ---
 
