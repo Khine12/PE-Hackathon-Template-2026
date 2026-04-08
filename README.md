@@ -289,7 +289,3 @@ PE-Hackathon-Template-2026/
 └── run.py                   # Development entry point
 ```
 
-## Team
-
-- **Khine Zar Hein** — Backend, Testing, CI/CD, Docker, Scalability, Monitoring, Documentation
-- **Nicolas Tran** — API testing and quality assurance, Project planning and review
